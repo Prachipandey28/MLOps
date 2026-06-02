@@ -1,0 +1,10 @@
+2026-06-02 23:10:39,894 [INFO] Job started
+2026-06-02 23:10:39,894 [INFO] Loading config from config.yaml
+2026-06-02 23:10:39,895 [INFO] Config loaded and validated successfully: seed=42, window=5, version=v1
+2026-06-02 23:10:39,895 [INFO] Set numpy random seed to 42
+2026-06-02 23:10:39,895 [INFO] Loading dataset from data.csv
+2026-06-02 23:10:39,917 [INFO] Dataset loaded with 10000 rows
+2026-06-02 23:10:39,919 [INFO] Computing rolling mean on close price with window size 5
+2026-06-02 23:10:39,921 [INFO] Generating binary signals
+2026-06-02 23:10:39,924 [INFO] Signal rate computed: 0.5076 over 9996 valid rows
+2026-06-02 23:10:39,924 [INFO] Job completed successfully. Metrics: {'version': 'v1', 'rows_processed': 10000, 'metric': 'signal_rate', 'value': 0.5076, 'latency_ms': 29, 'seed': 42, 'status': 'success'}
