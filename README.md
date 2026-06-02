@@ -41,16 +41,20 @@ Ensure the Docker daemon is running on your machine, then execute the following 
 docker build -t mlops-task .
 ```
 
-### 2. Run the Container
+### 2. Run the Container (Standard ephemeral execution)
+To run the container and output the metrics JSON to standard output (stdout), run:
 ```bash
 docker run --rm mlops-task
 ```
 
-Running the container will:
-- Read the bundled `data.csv` and `config.yaml`.
-- Run the signal generation batch job.
-- Output the final metrics JSON to standard output (stdout).
-- Write logs inside the container (which are also streamed to stderr).
+### 3. Run the Container (Persist outputs to host)
+Since running with `--rm` cleans up container files when it exits, `metrics.json` and `run.log` created inside the container will be deleted.
+
+To persist `metrics.json` and `run.log` to your host machine's directory, run the container with a directory bind mount (which maps your current host directory to `/app` inside the container):
+```bash
+docker run --rm -v "$(pwd)":/app mlops-task
+```
+Running this will write the output files `metrics.json` and `run.log` directly into your host project directory, while still printing the final metrics JSON to standard output.
 
 ---
 
