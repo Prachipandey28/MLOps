@@ -16,7 +16,6 @@ import pandas as pd
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Run MLOps batch job trading-signal pipeline.")
-    parser.add_index = False
     parser.add_argument("--input", required=True, help="Path to input data.csv")
     parser.add_argument("--config", required=True, help="Path to config.yaml")
     parser.add_argument("--output", required=True, help="Path to output metrics.json")
@@ -166,6 +165,7 @@ def main():
         }
         
         logger.info(f"Job completed successfully. Metrics: {metrics}")
+        logger.info(f"Job ended successfully at {time.strftime('%Y-%m-%dT%H:%M:%S')}")
         write_metrics(args.output, metrics)
         sys.exit(0)
         
@@ -178,9 +178,11 @@ def main():
         error_metrics = {
             "version": config_version,
             "status": "error",
-            "error_message": str(e)
+            "error_message": str(e),
+            "latency_ms": latency_ms
         }
         
+        logger.info(f"Job ended with failure at {time.strftime('%Y-%m-%dT%H:%M:%S')}")
         write_metrics(args.output, error_metrics)
         sys.exit(1)
 
